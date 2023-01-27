@@ -25,13 +25,31 @@ We sought to create and optimize image classification models that could diagnose
 3. Minimize *false negative* diagnoses, given lethality of pneumonia without proper treatment
 4. Increase the efficiency of the chest X-ray diagnostic process by deploying a quick, simple-to-run testing system.
 
+
+
 ## II. Data Understanding
 
-### Data Description
+### Data Source:
 
-### Data Exploration
+* Data consists of Chest X-Ray Images from pediatric patients (ages 1-5) at Guangzhou Women and Children’s Medical Center, taken as part of patients’ routine clinical care.
+  * Originally collected and used in a [larger study](https://www.cell.com/cell/fulltext/S0092-8674(18)30154-5) 
 
-### Data Quality
+* **Current dataset:** 5,863 Pediatric Chest X-Ray images (JPEG) taken from [Kaggle](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
+
+### Data Quality: 
+
+* In the [original study](https://www.cell.com/cell/fulltext/S0092-8674(18)30154-5) , all chest X-Rays were screened for quality control and graded by two expert physicians before being cleared for use.
+* No missing data or features
+
+### Data Exploration:
+
+### 
+
+
+
+
+
+
 
 ## III. Data Preparation
 
