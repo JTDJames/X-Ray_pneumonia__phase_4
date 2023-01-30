@@ -57,7 +57,19 @@ Our first steps in preparing the data involved resizing the images by dividing b
 
 ## IV. Data Modeling
 
-One of the most important factors in choosing our model was the model’s ability to limit false negatives. Even if it made our model slightly less accurate overall it was important our model rarely classified pneumonia x-rays as healthy x-rays. 
+One of the most important factors in choosing our model was the model’s ability to limit false negatives, in other words, minimizing the false omission rate. Even if it made our model slightly less accurate overall it was important our model rarely classified pneumonia x-rays as healthy x-rays. For the baseline model, a sequential model was chosen. The parameters chosen were chosen in order to prevent the model from having too many nodes. The input layer is a 2D convolutional layer with a 2x2 convolutional window and a dimensionality of 64. The activation used is relu. Padding was added in order to accomodate more layers in the future. The first hidden layer is a 2D max pooling layer which downsamples the input. The next hidden layers are a 2D convolutional layer with a dimensionality of 32 followed by a 2D max pooling layer. These layers are repeated once more except the following 2D convolutional layer has a dimensionality of 16. A flattening layer is then added, followed by a dense layer with dimensionality of 500. This will likely cause overfitting; however, since this is a baseline model, we can tune this in future iterations. The output layer is a dense layer with dimensionality 3. The filter was set to 3 as there are 3 category outputs for the model. This model performed well at predicting each class, 81.8 percent accuracy for bacterial pneumonia and 60.2 percent accuracy for viral pneumonia, as well as a false omission rate of only 6.0 percent; however, it was overfit. The goal of the following iterations was to try to reduce overfitting while maintaining good results.
+
+The second iteration of the model altered the dense layer to see how it affected the results. This model performed very well in terms of false omission rate, with a rate of only 5.8 percent; however, was extremely overfit, with a difference of over 10 percent between the accuracy on the training and validation data. The third iteration added L2 regularization, as well as another 2D convolutional layer between the current 2D Convolutional layer and the following Max Pooling layer. The Dense layers were also changed in an effort to cut down on overfitting. The resulting model was only slightly overfit, had a relatively low false omission rate, 6.6 percent, and did a decent job of predicting pneumonia, 79.0 percent for bacterial and 63.5 percent for viral. In order to try to further improve on this model, L2 regularization was added to the remaining two 2D convolutional layers and two 25 percent dropout layers were added. This model showed a good fit; however, the false omission rate was high, at roughly 12.5 percent.
+
+The fourth iteration of the model took the third and removed one of the 25 percent dropout layers. It also added in a Dense layer with dimesionality 128. This model did not appear to be underfit and looks like it could have used more training. Another iteration of this model was trained with with a early stop defined in order to try to reduce the loss and get a better fit. The resulting model was overfit but had the best false omission rate so far, only 5.5 percent. The fifth iteration of the model takes the same setup as the third iteration, except adds a dropout layer and defines early stopping in order to find the ideal fit. While this model performs pretty well, it is still slightly overfit and has a higher false omission rate, 7.8 percent.
+
+The final model was defined in the same way as the third model, as it performed the best, with the addition of an early stop and more epochs. Overall, this model performed extremely well compared to previous models without becoming too overfit, as seen in the evaluation plots below. Additionally, the model predicted bacterial pneumonia correctly 82.1 percent and viral pneumonia correctly 59.3 percent of the time which is comparable to trained radiologists accuracy rates, roughly 38-76 percent.
+
+![Model Evaluation Metrics](images/eval.png)
+
+Finally, the model minimized the false omission rate, which was our target, to only 7.1 percent. The false discovery rate was low as well at only 3.0 percent.
+
+![Model Evaluation Metrics](images/fp_fn_rate.png)
 
 ## V. Model Evaluation and Deployment
 
@@ -67,12 +79,12 @@ One of the most important factors in choosing our model was the model’s abilit
 
 
 
-Our model is exceptionally good at identifying whether someone is healthy or not. It can with 95? percent accuracy determines whether or not someone has pneumonia. In addition this model only classified a pneumonia x-ray as healthy ??? percent of the time.
+Our model is exceptionally good at identifying whether someone is healthy or not. With an accuracy of it 97 percent on unseen data, the model can predict whether or not someone has pneumonia based on their X-rays. Additionally, the false omission rate, the proportion of patients with pneumonia who were diagnosed as healthy, was minimized to just 7.1 percent. This means that a low number of potential pneumonia patients would slip through the cracks, especially after a final evaluation of the model results by a doctor. Overall, given that radiologist's accuracy rates range between 38-76 percent, this model can be a useful tool as an initial screening that can perform at similar rates to radiologists.
 
 #### Bacterial vs. Viral
 
 
 
-One of the other advantages to our model is its ability to classify an x-ray as either a viral pneumonia infection or a bacterial infection. Not only does it classify someone as being healthy or having pneumonia it can also determine what type of pneumonia the person has. Our model was able to accurately predict bacterial pneumonia ??? percent of the time and was ??? percent accurate in predicting viral pneumonia.
+One of the other advantages to our model is its ability to classify an x-ray as either a viral pneumonia infection or a bacterial infection. Our model was able to accurately predict bacterial pneumonia 82.1 percent of the time and was 59.3 percent accurate in predicting viral pneumonia. This can provide doctors with a good idea for correct treatment options given that nature of the pneumonia.
 
 ## VI. Conclusion 
