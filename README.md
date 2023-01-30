@@ -1,4 +1,4 @@
-# X-Ray_pneumonia__phase_4
+# Evaluation of Pneumonia X-Rays with Neural Networks
 
 **Authors:** [Ilan Haskel](https://www.linkedin.com/in/ilan-haskel-86280812b/), [Justin James](https://www.linkedin.com/in/jtdjames/), [Roshni Janakiraman](https://www.linkedin.com/in/roshni-janakiraman/), [Leif Schultz](https://www.linkedin.com/in/leifschultz/), and [Brandon Sienkiewicz](https://www.linkedin.com/in/brandon-sienkiewicz-data-science/)
 
